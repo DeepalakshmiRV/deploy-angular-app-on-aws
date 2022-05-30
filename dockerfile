@@ -1,7 +1,3 @@
-FROM node:alpine
-WORKDIR  /app
-COPY ./package.json  .
-RUN npm install
-COPY . .
-EXPOSE 4200
-CMD npm run start
+FROM nginx:alpine
+COPY /dist/app-to-run-inside-docker /usr/share/nginx/html
+EXPOSE 80
