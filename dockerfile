@@ -1,3 +1,10 @@
-FROM nginx:alpine
-COPY /dist/app-to-run-inside-docker /usr/share/nginx/html
-EXPOSE 80
+FROM node:alpine
+WORKDIR '/app'
+RUN npm install -g @angular/cli
+
+COPY package.json .
+RUN npm install
+COPY . .
+RUN ng build
+EXPOSE 4200
+CMD npm run start
